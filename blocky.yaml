@@ -9,10 +9,20 @@ spec:
     rules:
     - alert: BlockyAbsent
       annotations:
-        description: "DNS ad blocking will be down until Blocky is back up"
+        description: "DNS ad blocking will be down until Blocky is back up."
         summary: "Blocky has disappeared from Prometheus service discovery."
       expr: |
         absent(up{job="blocky"})
       for: 5m
+      labels:
+        severity: critical
+    - alert: BlockyDisabled
+      annotations:
+        description: "Blocky's ad blocking has been disabled for 15min.
+          Please re-enable protection."
+        summary: "Blocky is disabled."
+      expr: |
+        blocky_blocking_enabled != 1
+      for: 15m
       labels:
         severity: critical
