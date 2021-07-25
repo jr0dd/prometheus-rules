@@ -7,6 +7,14 @@ spec:
   groups:
   - name: blackbox.rules
     rules:
+    - alert: BlackboxExporterDown
+      annotations:
+        message: "Blackbox Exporter has disappeared from Prometheus target discovery."
+      expr: |
+        absent(up{job="blackbox-exporter"} == 1)
+      for: 5m
+      labels:
+        severity: critical
     - alert: BlackboxProbeFailed
       expr: |
         probe_success == 0
