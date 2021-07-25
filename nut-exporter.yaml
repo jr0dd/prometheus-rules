@@ -17,28 +17,28 @@ spec:
         severity: critical
     - alert: UpsStatusUnknown
       annotations:
-        description: "UPS status is unknown and needs to be investigated"
-        summary: "UPS status unknown"
+        description: "UPS {{ $labels.ups }} status is unknown and needs to be investigated"
+        summary: "UPS {{ $labels.ups }} status unknown"
       expr: |
-        nut_status == 0
+        nut_status{job="nut-exporter"} == 0
       for: 10s
       labels:
         severity: critical
     - alert: UpsOnBattery
       annotations:
-        description: "UPS has lost power and is running on battery"
-        summary: "UPS is running on battery"
+        description: "UPS {{ $labels.ups }} has lost power and is running on battery"
+        summary: "UPS {{ $labels.ups }} is running on battery"
       expr: |
-        nut_status == 2
+        nut_status{job="nut-exporter"} == 2
       for: 10s
       labels:
         severity: critical
     - alert: UpsLowBattery
       annotations:
-        description: "UPS battery is low and the system is getting ready to shutdown"
-        summary: "UPS battery is low"
+        description: "UPS {{ $labels.ups }} battery is low and the system is getting ready to shutdown"
+        summary: "UPS {{ $labels.ups }} battery is low"
       expr: |
-        nut_status == 3
+        nut_status{job="nut-exporter"} == 3
       for: 5s
       labels:
         severity: critical
