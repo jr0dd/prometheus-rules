@@ -23,7 +23,7 @@ spec:
         summary: "Traefik config error."
         description: "Traefik has failed to load the config file. Check Traefik logs for exact parsing error."
       expr: |
-        traefik_config_last_reload_failure != 0
+        traefik_config_last_reload_failure{job="traefik"} == 1
       for: 0m
       labels:
         severity: critical
