@@ -9,8 +9,9 @@ spec:
     rules:
     - alert: SnmpExporterDown
       annotations:
-        message: SNMP Exporter has disappeared from Prometheus target discovery.
-      expr: absent(up{job="snmp-exporter"} == 1)
+        message: "SNMP Exporter has disappeared from Prometheus target discovery."
+      expr: |
+        absent(up{job="snmp-exporter"} == 1)
       for: 5m
       labels:
         severity: critical
