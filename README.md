@@ -3,4 +3,4 @@ Alerting and recording rules I have written, edited or procurred from the interw
 Feel free to contribute as I'm still relatively new to PromQL
 
 
-***Be sure to set the correct namespace before importing
+***Be sure to set the correct namespace before importing***
