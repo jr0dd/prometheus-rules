@@ -9,14 +9,6 @@ spec:
   groups:
   - name: speedtest-exporter.rules
     rules:
-    - alert: SpeedtestExporterDown
-      annotations:
-        message: "Speedtest Exporter has disappeared from Prometheus target discovery."
-      expr: |
-        absent(up{job="speedtest-exporter"})
-      for: 5m
-      labels:
-        severity: critical
     - alert: SpeedtestSlowInternetDownload
       expr: |
         avg_over_time(speedtest_download[6h])
