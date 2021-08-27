@@ -1,3 +1,4 @@
+---
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
@@ -5,23 +6,23 @@ metadata:
   namespace: bots
 spec:
   groups:
-  - name: discord-stock-ticker.rules
-    rules:
-    - alert: DiscordStockTickerAbsent
-      annotations:
-        description: Bots will be down until discord-stock-ticker is back up
-        summary: Bots have disappeared from Prometheus service discovery.
-      expr: |
-        absent(up{job="discord-stock-ticker"})
-      for: 5m
-      labels:
-        severity: critical
-    - alert: ZeroTickers
-      annotations:
-        description: Bot is not reporting any tickers in the api
-        summary: Bot has 0 tickers
-      expr: |
-        ticker_count{job="discord-stock-ticker"} == 0
-      for: 5m
-      labels:
-        severity: critical
+    - name: discord-stock-ticker.rules
+      rules:
+        - alert: DiscordStockTickerAbsent
+          annotations:
+            description: Bots will be down until discord-stock-ticker is back up
+            summary: Bots have disappeared from Prometheus service discovery.
+          expr: |
+            absent(up{job="discord-stock-ticker"})
+          for: 5m
+          labels:
+            severity: critical
+        - alert: ZeroTickers
+          annotations:
+            description: Bot is not reporting any tickers in the api
+            summary: Bot has 0 tickers
+          expr: |
+            ticker_count{job="discord-stock-ticker"} == 0
+          for: 5m
+          labels:
+            severity: critical
