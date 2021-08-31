@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- blackbox-exporter.yaml
+- blocky.yaml
+- cert-manager.yaml
+- coredns.yaml
+- discord-stock-ticker.yaml
+- loki.yaml
+- metallb.yaml
+- minio.yaml
+- nut-exporter.yaml
+- promtail.yaml
+- snmp-exporter.yaml
+- speedtest-exporter.yaml
+- thanos-compact.yaml
+- thanos-query.yaml
+- thanos-receive.yaml
+- thanos-replicate.yaml
+- thanos-ruler.yaml
+- thanos-sidecar.yaml
+- thanos-store.yaml
+- traefik.yaml
