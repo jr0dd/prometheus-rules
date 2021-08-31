@@ -64,4 +64,3 @@ spec:
             summary: MinIO node is low on disk space.
             description: MinIO node is reporting less than 10% disk space available.
               {{ $value | humanizePercentage }} of disk space available on node {{ $labels.server }}
-
