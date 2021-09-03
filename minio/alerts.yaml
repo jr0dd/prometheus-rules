@@ -23,7 +23,7 @@ spec:
             summary: MinIO disk(s) offline.
           expr: |
             minio_cluster_disk_offline_total != 0
-          for: 0m
+          for: 1m
           labels:
             severity: critical
         - alert: MinioNodeOffline
@@ -32,7 +32,7 @@ spec:
             summary: MinIO node is offline.
           expr: |
             minio_cluster_nodes_offline_total != 0
-          for: 0m
+          for: 1m
           labels:
             severity: critical
         - alert: MinioClusterUsage
