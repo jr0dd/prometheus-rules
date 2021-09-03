@@ -42,4 +42,3 @@ spec:
           labels:
             quantile: "0.99"
           record: :api_range_query_duration_seconds:histogram_quantile
-          

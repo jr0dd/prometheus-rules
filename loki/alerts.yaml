@@ -41,8 +41,8 @@ spec:
             severity: critical
         - alert: LokiRequestLatency
           annotations:
-            descritpion: Loki is experiencing {{ $value }}s 99th percentile latency on 
-              {{ $labels.job }} {{ $labels.route }}. 
+            descritpion: Loki is experiencing {{ $value }}s 99th percentile latency on
+              {{ $labels.job }} {{ $labels.route }}.
             summary: Loki request latency.
           expr: |
             namespace_job_route:loki_request_duration_seconds:99quantile{route!~"(?i).*tail.*"}
