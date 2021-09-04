@@ -13,7 +13,7 @@ spec:
       port: metrics
       scrapeTimeout: 5s
       relabelings:
-        - sourceLabels: ['__namespace__', 'job']
+        - sourceLabels: ['namespace', 'job']
           regex: ".+/(.*)"
           targetLabel: "job"
           replacement: "$1"

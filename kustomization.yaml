@@ -8,6 +8,7 @@ resources:
   - cert-manager
   - coredns
   - discord-stock-ticker
+  - flux
   - gluster
   - loki
   - metallb
