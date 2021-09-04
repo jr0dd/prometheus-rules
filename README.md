@@ -31,7 +31,6 @@ Some of the sources these have been created from:
 * [exporter-absent](#exporter-absent)
 * [flux](#flux)
 * [loki](#loki)
-* [metallb](#metallb)
 * [minio](#minio)
 * [nut-exporter](#nut-exporter)
 * [promtail](#promtail)
@@ -125,18 +124,6 @@ Some of the sources these have been created from:
 |LokiRequestErrors|Loki high error rate.|Loki is experiencing {{ $value  humanizePercentage }} of errors on {{ $labels.job }} {{ $labels.route }}.|critical||
 |LokiRequestPanics|Loki request panics.|Loki is experiencing {{ $value  humanizePercentage }} increase of panics on {{ $labels.job }}.|critical||
 |LokiRequestLatency|Loki request latency.||critical||
-
-## metallb
-
-|Name|Summary|Description|Severity|Runbook|
-|---|---|---|---|---|
-|MetalLBStaleConfig||{{ $labels.job }} - MetalLB {{ $labels.container }} on {{ $labels.pod }} has a stale config for > 1 minute|warning||
-|MetalLBConfigNotLoaded||{{ $labels.job }} - MetalLB {{ $labels.container }} on {{ $labels.pod }} has not loaded for > 1 minute|warning||
-|MetalLBAddressPoolExhausted||{{ $labels.job }} - MetalLB {{ $labels.container }} on {{ $labels.pod }} has exhausted address pool {{ $labels.pool }} for > 1 minute|alert||
-|MetalLBAddressPoolUsage75Percent||{{ $labels.job }} - MetalLB {{ $labels.container }} on {{ $labels.pod }} has address pool {{ $labels.pool }} past 75% usage for > 1 minute|warning||
-|MetalLBAddressPoolUsage85Percent||{{ $labels.job }} - MetalLB {{ $labels.container }} on {{ $labels.pod }} has address pool {{ $labels.pool }} past 85% usage for > 1 minute|warning||
-|MetalLBAddressPoolUsage95Percent||{{ $labels.job }} - MetalLB {{ $labels.container }} on {{ $labels.pod }} has address pool {{ $labels.pool }} past 95% usage for > 1 minute|alert||
-|MetalLBBGPSessionDown||{{ $labels.job }} - MetalLB {{ $labels.container }} on {{ $labels.pod }} has BGP session {{ $labels.peer }} down for > 1 minute|critical||
 
 ## minio
 
