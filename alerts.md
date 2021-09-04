@@ -94,7 +94,7 @@
 
 |Name|Summary|Description|Severity|Runbook|
 |---|---|---|---|---|
-|ReconciliationFailure|Flux reconciliation failure.|{{ $labels.kind }} {{ $labels.namespace }}/{{ $labels.name }} reconciliation has been failing for more than ten minutes.|critical||
+|FluxReconciliationFailure|Flux reconciliation failure.|{{ $labels.kind }} {{ $labels.namespace }}/{{ $labels.name }} reconciliation has been failing for more than ten minutes.|critical||
 
 ## loki
 
