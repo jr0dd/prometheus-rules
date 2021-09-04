@@ -14,6 +14,7 @@ resources:
   - minio
   - nut-exporter
   - promtail
+  - qbittorrent
   - snmp-exporter
   - speedtest-exporter
   - thanos

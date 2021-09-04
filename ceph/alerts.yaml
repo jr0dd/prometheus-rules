@@ -67,7 +67,7 @@ spec:
             storage_type: ceph
           expr: |
             (ceph_mon_metadata{job="rook-ceph-mgr"} * on (ceph_daemon) group_left()
-            (rate(ceph_mon_num_elections{job="rook-ceph-mgr"}[5m]) * 60))
+              (rate(ceph_mon_num_elections{job="rook-ceph-mgr"}[5m]) * 60))
               > 0.95
           for: 5m
           labels:
@@ -98,7 +98,7 @@ spec:
             storage_type: ceph
           expr: |
             (ceph_osd_metadata * on (ceph_daemon) group_right(device_class)
-            (ceph_osd_stat_bytes_used / ceph_osd_stat_bytes))
+              (ceph_osd_stat_bytes_used / ceph_osd_stat_bytes))
               >= 0.80
           for: 40s
           labels:
@@ -126,7 +126,7 @@ spec:
             storage_type: ceph
           expr: |
             (ceph_osd_metadata * on (ceph_daemon) group_right(device_class)
-            (ceph_osd_stat_bytes_used / ceph_osd_stat_bytes))
+              (ceph_osd_stat_bytes_used / ceph_osd_stat_bytes))
               >= 0.75
           for: 40s
           labels:
@@ -139,7 +139,7 @@ spec:
             storage_type: ceph
           expr: |
             label_replace((ceph_osd_in == 1 and ceph_osd_up == 0),"disk","$1","ceph_daemon","osd.(.*)") + on(ceph_daemon)
-            group_left(host, device) label_replace(ceph_disk_occupation,"host","$1","exported_instance","(.*)")
+              group_left(host, device) label_replace(ceph_disk_occupation,"host","$1","exported_instance","(.*)")
           for: 1m
           labels:
             severity: critical
@@ -151,7 +151,7 @@ spec:
             storage_type: ceph
           expr: |
             label_replace((ceph_osd_in == 0 and ceph_osd_up == 0),"disk","$1","ceph_daemon","osd.(.*)") + on(ceph_daemon)
-            group_left(host, device) label_replace(ceph_disk_occupation,"host","$1","exported_instance","(.*)")
+              group_left(host, device) label_replace(ceph_disk_occupation,"host","$1","exported_instance","(.*)")
           for: 1m
           labels:
             severity: critical
@@ -201,12 +201,12 @@ spec:
             storage_type: ceph
           expr: |
             (kubelet_volume_stats_used_bytes * on (namespace,persistentvolumeclaim) group_left(storageclass, provisioner)
-            (kube_persistentvolumeclaim_info * on (storageclass)  group_left(provisioner)
-            kube_storageclass_info {provisioner=~"(.*rbd.csi.ceph.com)|(.*cephfs.csi.ceph.com)"}))
+              (kube_persistentvolumeclaim_info * on (storageclass)  group_left(provisioner)
+                kube_storageclass_info {provisioner=~"(.*rbd.csi.ceph.com)|(.*cephfs.csi.ceph.com)"}))
               /
             (kubelet_volume_stats_capacity_bytes * on (namespace,persistentvolumeclaim) group_left(storageclass, provisioner)
-            (kube_persistentvolumeclaim_info * on (storageclass)  group_left(provisioner) kube_storageclass_info
-            {provisioner=~"(.*rbd.csi.ceph.com)|(.*cephfs.csi.ceph.com)"}))
+              (kube_persistentvolumeclaim_info * on (storageclass)  group_left(provisioner) kube_storageclass_info
+                {provisioner=~"(.*rbd.csi.ceph.com)|(.*cephfs.csi.ceph.com)"}))
               > 0.75
           for: 5s
           labels:
@@ -221,12 +221,12 @@ spec:
             storage_type: ceph
           expr: |
             (kubelet_volume_stats_used_bytes * on (namespace,persistentvolumeclaim) group_left(storageclass, provisioner)
-            (kube_persistentvolumeclaim_info * on (storageclass)  group_left(provisioner) kube_storageclass_info
-            {provisioner=~"(.*rbd.csi.ceph.com)|(.*cephfs.csi.ceph.com)"}))
+              (kube_persistentvolumeclaim_info * on (storageclass)  group_left(provisioner) kube_storageclass_info
+                {provisioner=~"(.*rbd.csi.ceph.com)|(.*cephfs.csi.ceph.com)"}))
               /
             (kubelet_volume_stats_capacity_bytes * on (namespace,persistentvolumeclaim) group_left(storageclass, provisioner)
-            (kube_persistentvolumeclaim_info * on (storageclass)  group_left(provisioner) kube_storageclass_info
-            {provisioner=~"(.*rbd.csi.ceph.com)|(.*cephfs.csi.ceph.com)"}))
+              (kube_persistentvolumeclaim_info * on (storageclass)  group_left(provisioner) kube_storageclass_info
+                {provisioner=~"(.*rbd.csi.ceph.com)|(.*cephfs.csi.ceph.com)"}))
               > 0.85
           for: 5s
           labels:

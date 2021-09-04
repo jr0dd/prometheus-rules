@@ -4,12 +4,12 @@ kind: PrometheusRule
 metadata:
   name: gluster.rules
 spec:
-groups:
-  - name: gluster.rules
-    rules:
-      - expr: |
-          sum(max(gluster_subvol_capacity_used_bytes{job="glusterd2-client"}) BY (volume, subvolume)) BY (volume)
-        record: gluster:volume_capacity_used_bytes_total:sum
-      - expr: |
-          sum(max(gluster_subvol_capacity_total_bytes{job="glusterd2-client"}) BY (volume, subvolume)) BY (volume)
-        record: gluster:volume_capacity_total_bytes:sum
+  groups:
+    - name: gluster.rules
+      rules:
+        - expr: |
+            sum(max(gluster_subvol_capacity_used_bytes{job="glusterd2-client"}) BY (volume, subvolume)) BY (volume)
+          record: gluster:volume_capacity_used_bytes_total:sum
+        - expr: |
+            sum(max(gluster_subvol_capacity_total_bytes{job="glusterd2-client"}) BY (volume, subvolume)) BY (volume)
+          record: gluster:volume_capacity_total_bytes:sum
