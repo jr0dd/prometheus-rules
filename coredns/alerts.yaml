@@ -54,8 +54,6 @@ spec:
           for: 10m
           labels:
             severity: critical
-    - name: coredns_forward
-      rules:
         - alert: CoreDNSForwardLatencyHigh
           annotations:
             description: CoreDNS has 99th percentile latency of {{ $value }} seconds forwarding

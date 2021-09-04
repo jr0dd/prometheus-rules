@@ -15,8 +15,6 @@ spec:
           for: 15m
           labels:
             severity: critical
-    - name: status-alert
-      rules:
         - alert: GlusterBrickStatus
           annotations:
             message: Gluster Brick {{$labels.hostname}}:{{$labels.brick_path}} is down.
@@ -33,8 +31,6 @@ spec:
           for: 1m
           labels:
             severity: critical
-    - name: gluster-utilization
-      rules:
         - alert: GlusterVolumeUtilization
           annotations:
             message: Gluster Volume {{$labels.volume}} Utilization more than 80%
@@ -81,8 +77,6 @@ spec:
           for: 5m
           labels:
             severity: critical
-    - name: thinpool-utilization
-      rules:
         - alert: GlusterThinpoolDataUtilization
           annotations:
             message: Gluster Thinpool {{ $labels.thinpool_name }} Data Utilization more

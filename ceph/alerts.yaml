@@ -5,7 +5,7 @@ metadata:
   name: rook-ceph
 spec:
   groups:
-    - name: ceph-mgr-status
+    - name: rook-ceph
       rules:
         - alert: CephMgrIsAbsent
           annotations:
@@ -29,8 +29,6 @@ spec:
           for: 5m
           labels:
             severity: warning
-    - name: ceph-mds-status
-      rules:
         - alert: CephMdsMissingReplicas
           annotations:
             description: Minimum required replicas for storage metadata service not available.
@@ -43,8 +41,6 @@ spec:
           for: 5m
           labels:
             severity: warning
-    - name: quorum-alert
-      rules:
         - alert: CephMonQuorumAtRisk
           annotations:
             description: Storage cluster quorum is low. Contact Support.
@@ -72,8 +68,6 @@ spec:
           for: 5m
           labels:
             severity: warning
-    - name: ceph-node-alert
-      rules:
         - alert: CephNodeDown
           annotations:
             description: Storage node {{ $labels.node }} went down. Please check the node
@@ -86,8 +80,6 @@ spec:
           for: 30s
           labels:
             severity: critical
-    - name: osd-alert
-      rules:
         - alert: CephOSDCriticallyFull
           annotations:
             description: Utilization of storage device {{ $labels.ceph_daemon }} of device_class
@@ -189,8 +181,6 @@ spec:
           for: 1h
           labels:
             severity: warning
-    - name: persistent-volume-alert
-      rules:
         - alert: PersistentVolumeUsageNearFull
           annotations:
             description: PVC {{ $labels.persistentvolumeclaim }} utilization has crossed
@@ -231,8 +221,6 @@ spec:
           for: 5s
           labels:
             severity: critical
-    - name: cluster-state-alert
-      rules:
         - alert: CephClusterErrorState
           annotations:
             description: Storage cluster is in error state for more than 10m.
@@ -279,8 +267,6 @@ spec:
           for: 10m
           labels:
             severity: warning
-    - name: cluster-utilization-alert
-      rules:
         - alert: CephClusterNearFull
           annotations:
             description: Storage cluster utilization has crossed 75% and will become read-only
@@ -329,8 +315,6 @@ spec:
           for: 0s
           labels:
             severity: critical
-    - name: pool-quota
-      rules:
         - alert: CephPoolQuotaBytesNearExhaustion
           annotations:
             description: Storage pool {{ $labels.name }} quota usage has crossed 70%.

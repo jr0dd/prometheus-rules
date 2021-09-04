@@ -19,8 +19,6 @@ spec:
               /
             (clamp_min(irate(node_disk_reads_completed_total[1m]), 1) + irate(node_disk_writes_completed_total[1m])))))
           record: cluster:ceph_disk_latency:join_ceph_node_disk_irate1m
-    - name: telemeter.rules
-      rules:
         - expr: |
             count(ceph_osd_metadata{job="rook-ceph-mgr"})
           record: job:ceph_osd_metadata:count

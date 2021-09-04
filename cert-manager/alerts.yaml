@@ -18,8 +18,6 @@ spec:
           for: 10m
           labels:
             severity: critical
-    - name: certificates
-      rules:
         - alert: CertManagerCertExpirySoon
           annotations:
             description: The domain that this cert covers will be unavailable after
