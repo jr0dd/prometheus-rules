@@ -10,7 +10,6 @@
 * [exporter-absent](#exporter-absent)
 * [flux](#flux)
 * [loki](#loki)
-* [metallb](#metallb)
 * [minio](#minio)
 * [nut-exporter](#nut-exporter)
 * [promtail](#promtail)
@@ -138,6 +137,7 @@
 |Name|Summary|Description|Severity|Runbook|
 |---|---|---|---|---|
 |qBittorrentExporterAbsent|qBittorrent Exporter is down.|qBittorrent Exporter has disappeared from Prometheus service discovery.|critical||
+|qBittorrentDown|qBittorrent is down.|qBittorrent service is down.|critical||
 
 ## rook-ceph
 

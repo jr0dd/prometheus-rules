@@ -158,6 +158,7 @@ Some of the sources these have been created from:
 |Name|Summary|Description|Severity|Runbook|
 |---|---|---|---|---|
 |qBittorrentExporterAbsent|qBittorrent Exporter is down.|qBittorrent Exporter has disappeared from Prometheus service discovery.|critical||
+|qBittorrentDown|qBittorrent is down.|qBittorrent service is down.|critical||
 
 ## rook-ceph
 
