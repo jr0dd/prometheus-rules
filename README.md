@@ -295,3 +295,5 @@ Some of the sources these have been created from:
 |TraefikHighHttp4xxErrorRateService|Traefik has a high HTTP 4xx error rate.|Traefik is reporting {{ $value  humanizePercentage }} of 4xx errors on {{ $labels.service }}.|critical||
 |TraefikHighHttp5xxErrorRateService|Traefik has a high HTTP 5xx error rate.|Traefik is reporting {{ $value  humanizePercentage }} of 5xx errors on {{ $labels.service }}.|critical||
 |TraefikTooManyRequest|Traefik has too many open connections.|Traefik is reporting {{ $value }} of open connections on entrypoint {{ $labels.entrypoint }}.|critical||
+
+*** Generated with plex-systems [promdoc](https://github.com/plexsystems/promdoc)
