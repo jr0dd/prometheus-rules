@@ -13,8 +13,10 @@ resources:
   - loki
   - minio
   - nut-exporter
+  - postgres-exporter
   - promtail
   - qbittorrent
+  - redis-exporter
   - snmp-exporter
   - speedtest-exporter
   - thanos

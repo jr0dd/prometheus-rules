@@ -33,8 +33,10 @@ Some of the sources these have been created from:
 * [loki](#loki)
 * [minio](#minio)
 * [nut-exporter](#nut-exporter)
+* [postgres-exporter](#postgres-exporter)
 * [promtail](#promtail)
 * [qbittorrent-exporter](#qbittorrent-exporter)
+* [redis-exporter](#redis-exporter)
 * [rook-ceph](#rook-ceph)
 * [snmp-exporter](#snmp-exporter)
 * [speedtest-exporter](#speedtest-exporter)
@@ -144,6 +146,36 @@ Some of the sources these have been created from:
 |UpsOnBattery|UPS is running on battery.|UPS {{ $labels.ups }} has lost power and is running on battery.|critical||
 |UpsLowBattery|UPS battery is low.|UPS {{ $labels.ups }} battery is low and the system is getting ready to shutdown.|critical||
 
+## postgres-exporter
+
+|Name|Summary|Description|Severity|Runbook|
+|---|---|---|---|---|
+|PostgresqlDown|Postgresql is down.|Postgresql Exporter has disappeared from Prometheus target discovery.|critical||
+|PostgresqlRestarted|Postgresql restarted.|Postgresql has restarted.|critical||
+|PostgresqlExporterError|Postgresql exporter error.|Postgresql exporter is showing errors. A query may be buggy in query.yaml.|critical||
+|PostgresqlReplicationLag|Postgresql replication lag.|PostgreSQL replication lag is reporting {{ $value }}s.|critical||
+|PostgresqlTableNotVaccumed|Postgresql table not vaccumed.|Table has not been vaccum for 24 hours.|warning||
+|PostgresqlTableNotAnalyzed|Postgresql table not analyzed.|Table has not been analyzed for 24 hours.|warning||
+|PostgresqlTooManyConnections|Postgresql too many connections.|PostgreSQL instance has too many connections {{ $value  humanizePercentage }}.|warning||
+|PostgresqlNotEnoughConnections|Postgresql not enough connections.|PostgreSQL instance should have more than {{ $value }} connections|warning||
+|PostgresqlDeadLocks|Postgresql deadlocks.|PostgreSQL is reporting deadlocks on {{ $label.datid }}|warning||
+|PostgresqlSlowQueries|Postgresql slow queries.|PostgreSQL executes slow queries.|warning||
+|PostgresqlHighRollbackRate|Postgresql high rollback rate.|Ratio of transactions being aborted compared to committed is > 2%.|warning||
+|PostgresqlCommitRateLow|Postgresql commit rate low.|Postgres seems to be processing very few transactions.|critical||
+|PostgresqlLowXidConsumption|Postgresql low XID consumption.|Postgresql seems to be consuming transaction IDs very slowly.|warning||
+|PostgresqllowXlogConsumption|Postgresqllow XLOG consumption.|Postgres seems to be consuming XLOG very slowly.|warning||
+|PostgresqlWaleReplicationStopped|WAL-E replication stopped.|Postgres is reporting that WAL-E replication is stopped.|critical||
+|PostgresqlHighRateStatementTimeout|Postgresql high rate statement timeout.|Postgres transactions showing high rate of statement timeouts.|critical||
+|PostgresqlHighRateDeadlock|Postgresql detected deadlocks.|Postgres is reporting a high number of deadlocks.|critical||
+|PostgresqlReplicationLagBytes|Postgresql replication lag.|Postgres Replication lag {{ $value }} (in bytes) is high.|critical||
+|PostgresqlUnusedReplicationSlot|Unused replication slots.|Postgres is reporting unused replication slots.|warning||
+|PostgresqlTooManyDeadTuples|Postgresql too many dead tuples.|PostgreSQL dead tuples is too large.|warning||
+|PostgresqlSplitBrain|Postgresql split brain.|Split Brain, too many primary Postgresql databases in read-write mode.|critical||
+|PostgresqlPromotedNode|Postgresql promoted node.|Postgresql standby server has been promoted as primary node.|warning||
+|PostgresqlConfigurationChanged|Postgresql configuration changed.|Postgres Database configuration change has occurred.|warning||
+|PostgresqlSslCompressionActive|Postgresql SSL compression active (instance {{ $labels.instance }})|Database connections with SSL compression enabled. This may add significant jitter in replication delay. Replicas should turn off SSL compression via `sslcompression=0` in `recovery.conf`.|critical||
+|PostgresqlTooManyLocksAcquired|Postgresql too many locks acquired (instance {{ $labels.instance }})|Too many locks acquired on the database. If this alert happens frequently, we may need to increase the postgres setting max_locks_per_transaction.|critical||
+
 ## promtail
 
 |Name|Summary|Description|Severity|Runbook|
@@ -159,6 +191,23 @@ Some of the sources these have been created from:
 |---|---|---|---|---|
 |qBittorrentExporterAbsent|qBittorrent Exporter is down.|qBittorrent Exporter has disappeared from Prometheus service discovery.|critical||
 |qBittorrentDown|qBittorrent is down.|qBittorrent service is down.|critical||
+
+## redis-exporter
+
+|Name|Summary|Description|Severity|Runbook|
+|---|---|---|---|---|
+|RedisDown|Redis is down.|Redis Exporter has disappeared from Prometheus target discovery.|critical||
+|RedisMissingMaster|Redis missing master.|Redis cluster has no node marked as master.|critical||
+|RedisTooManyMasters|Redis too many masters.|Redis cluster has too many nodes marked as master.|critical||
+|RedisDisconnectedSlaves|Redis disconnected slaves.|Redis not replicating for all slaves. Consider reviewing the redis replication status.|critical||
+|RedisReplicationBroken|Redis replication broken.|Redis instance lost a slave.|critical||
+|RedisClusterFlapping|Redis cluster flapping.|Changes have been detected in Redis replica connection. This can occur when replica nodes lose connection to the master and reconnect (a.k.a flapping).|critical||
+|RedisMissingBackup|Redis missing backup.|Redis has not been backuped for 24 hours.|critical||
+|RedisOutOfSystemMemory|Redis out of system memory.|Redis is running out of system memory (> 90%).|warning||
+|RedisOutOfConfiguredMaxmemory|Redis out of configured maxmemory.|Redis is running out of configured maxmemory (> 90%).|warning||
+|RedisTooManyConnections|Redis too many connections.|Redis instance has too many connections.|warning||
+|RedisNotEnoughConnections|Redis not enough connections.|Redis instance should have more connections (> 5).|warning||
+|RedisRejectedConnections|Redis rejected connections.|Some connections to Redis has been rejected.|critical||
 
 ## rook-ceph
 
@@ -295,5 +344,3 @@ Some of the sources these have been created from:
 |TraefikHighHttp4xxErrorRateService|Traefik has a high HTTP 4xx error rate.|Traefik is reporting {{ $value  humanizePercentage }} of 4xx errors on {{ $labels.service }}.|critical||
 |TraefikHighHttp5xxErrorRateService|Traefik has a high HTTP 5xx error rate.|Traefik is reporting {{ $value  humanizePercentage }} of 5xx errors on {{ $labels.service }}.|critical||
 |TraefikTooManyRequest|Traefik has too many open connections.|Traefik is reporting {{ $value }} of open connections on entrypoint {{ $labels.entrypoint }}.|critical||
-
-*** Generated with plex-systems [promdoc](https://github.com/plexsystems/promdoc)
