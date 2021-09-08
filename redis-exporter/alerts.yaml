@@ -131,3 +131,12 @@ spec:
           for: 0m
           labels:
             severity: critical
+        - alert: RedisKeyEviction
+          annotations:
+            description: Redis instance {{ $labels.instance }} has evicted {{ $value }} keys in the last 5 minutes.
+            summary: Redis instance {{ $labels.instance }} has evicted keys.
+          expr: |
+            increase(redis_evicted_keys_total{service=~".*redis.*"}[5m]) > 0
+          for: 1s
+          labels:
+            severity: warning
