@@ -7,8 +7,8 @@
 * [cert-manager](#cert-manager)
 * [coredns](#coredns)
 * [discord-stock-ticker](#discord-stock-ticker)
-* [exporter-absent](#exporter-absent)
 * [flux](#flux)
+* [gluster](#gluster)
 * [loki](#loki)
 * [minio](#minio)
 * [nut-exporter](#nut-exporter)
@@ -59,7 +59,7 @@
 
 |Name|Summary|Description|Severity|Runbook|
 |---|---|---|---|---|
-|CoreDNSDown|CoreDNS is down.|CoreDNS has disappeared from Prometheus target discovery.|critical|[https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednsdown](https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednsdown)|
+|CoreDNSAbsent|CoreDNS is down.|CoreDNS has disappeared from Prometheus target discovery.|critical|[https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednsdown](https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednsdown)|
 |CoreDNSPanicCount|CoreDNS encountering panics.|CoreDNS is encountering {{ $value }} panics.|critical||
 |CoreDNSLatencyHigh|CoreDNS is experiencing latency.|CoreDNS has 99th percentile latency of {{ $value }} seconds for server {{ $labels.server }} zone {{ $labels.zone }}.|critical|[https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednslatencyhigh](https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednslatencyhigh)|
 |CoreDNSErrorsHigh|CoreDNS is returning SERVFAIL.|CoreDNS is returning SERVFAIL for {{ $value  humanizePercentage }} of requests.|critical|[https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednserrorshigh](https://github.com/povilasv/coredns-mixin/tree/master/runbook.md#alert-name-corednserrorshigh)|
@@ -75,11 +75,18 @@
 |DiscordStockTickerAbsent|Discord Stock Ticker is down.|Discord Stock Ticker has disappeared from Prometheus service discovery.|critical||
 |ZeroTickers|Bot has 0 tickers.|Discord Stock Ticker did not receive the payload to the api.|critical||
 
-## exporter-absent
+## flux
 
 |Name|Summary|Description|Severity|Runbook|
 |---|---|---|---|---|
-|GlusterExporterDown||GlusterExporter has disappeared from Prometheus target discovery.|critical||
+|FluxComponentAbsent|Flux component is down.|Flux component has disappeared from Prometheus target discovery.|critical||
+|FluxReconciliationFailure|Flux reconciliation failure.|{{ $labels.kind }} {{ $labels.namespace }}/{{ $labels.name }} reconciliation has been failing for more than ten minutes.|critical||
+
+## gluster
+
+|Name|Summary|Description|Severity|Runbook|
+|---|---|---|---|---|
+|GlusterExporterAbsent||Gluster Exporter has disappeared from Prometheus target discovery.|critical||
 |GlusterBrickStatus||Gluster Brick {{$labels.hostname}}:{{$labels.brick_path}} is down.|critical||
 |GlusterVolumeStatus||Gluster Volume {{$labels.volume}} is down.|critical||
 |GlusterVolumeUtilization||Gluster Volume {{$labels.volume}} Utilization more than 80%|warning||
@@ -90,12 +97,6 @@
 |GlusterThinpoolDataUtilization||Gluster Thinpool {{ $labels.thinpool_name }} Data Utilization more than 90%|critical||
 |GlusterThinpoolMetadataUtilization||Gluster Thinpool {{ $labels.thinpool_name }} Metadata Utilization more than 80%|warning||
 |GlusterThinpoolMetadataUtilization||Gluster Thinpool {{ $labels.thinpool_name }} Metadata Utilization more than 90%|critical||
-
-## flux
-
-|Name|Summary|Description|Severity|Runbook|
-|---|---|---|---|---|
-|FluxReconciliationFailure|Flux reconciliation failure.|{{ $labels.kind }} {{ $labels.namespace }}/{{ $labels.name }} reconciliation has been failing for more than ten minutes.|critical||
 
 ## loki
 
@@ -120,7 +121,7 @@
 
 |Name|Summary|Description|Severity|Runbook|
 |---|---|---|---|---|
-|NutExporterDown|NUT Exporter is down.|NUT Exporter has disappeared from Prometheus target discovery.|critical||
+|NutExporterAbsent|NUT Exporter is down.|NUT Exporter has disappeared from Prometheus target discovery.|critical||
 |UpsStatusUnknown|UPS status unknown.|UPS {{ $labels.ups }} is reporting a status of unknown.|critical||
 |UpsOnBattery|UPS is running on battery.|UPS {{ $labels.ups }} has lost power and is running on battery.|critical||
 |UpsLowBattery|UPS battery is low.|UPS {{ $labels.ups }} battery is low and the system is getting ready to shutdown.|critical||
@@ -129,7 +130,8 @@
 
 |Name|Summary|Description|Severity|Runbook|
 |---|---|---|---|---|
-|PostgresqlDown|Postgresql is down.|Postgresql Exporter has disappeared from Prometheus target discovery.|critical||
+|PostgresqlExporterAbsent|Postgresql Exporter is down.|Postgresql Exporter has disappeared from Prometheus target discovery.|critical||
+|PostgresqlDown|Postgresql is down.|Postgresql service is down.|critical||
 |PostgresqlRestarted|Postgresql restarted.|Postgresql has restarted.|critical||
 |PostgresqlExporterError|Postgresql exporter error.|Postgresql exporter is showing errors. A query may be buggy in query.yaml.|critical||
 |PostgresqlReplicationLag|Postgresql replication lag.|PostgreSQL replication lag is reporting {{ $value }}s.|critical||
@@ -159,6 +161,7 @@
 
 |Name|Summary|Description|Severity|Runbook|
 |---|---|---|---|---|
+|PromtailAbsent|Promtail is down.|Promtail has disappeared from Prometheus target discovery.|critical||
 |PromtailRequestsErrors|Promtail request errors.|Promtail host {{ $labels.host }} is experiencing {{ $value  humanizePercentage }} errors.|critical||
 |PromtailRequestLatency|Promtail request high latency.|Promtail host {{ $labels.host }} is experiencing {{ $value }}s 99th percentile latency.|critical||
 |PromtailFileLagging|Promtail file lagging.|Log file for {{ $labels.instance }} {{ $labels.job }} {{ $labels.path }} has been lagging by more than 1MB for more than 15m.|warning||
@@ -175,7 +178,8 @@
 
 |Name|Summary|Description|Severity|Runbook|
 |---|---|---|---|---|
-|RedisDown|Redis is down.|Redis Exporter has disappeared from Prometheus target discovery.|critical||
+|RedisExporterAbsent|Redis Exporter is down.|Redis Exporter has disappeared from Prometheus target discovery.|critical||
+|RedisDown|Redis is down.|Redis service is down.|critical||
 |RedisMissingMaster|Redis missing master.|Redis cluster has no node marked as master.|critical||
 |RedisTooManyMasters|Redis too many masters.|Redis cluster has too many nodes marked as master.|critical||
 |RedisDisconnectedSlaves|Redis disconnected slaves.|Redis not replicating for all slaves. Consider reviewing the redis replication status.|critical||
@@ -223,13 +227,14 @@
 
 |Name|Summary|Description|Severity|Runbook|
 |---|---|---|---|---|
-|SnmpExporterDown|SNMP Exporter is down.|SNMP Exporter has disappeared from Prometheus target discovery.|critical||
+|SnmpExporterAbsent|SNMP Exporter is down.|SNMP Exporter has disappeared from Prometheus target discovery.|critical||
 |SnmpExporterScrapeSlow|SNMP Exporter slow scraping.|SNMP Exporter is experiencing slow scraping of {{ $labels.job }} with a duration of {{ $value }} seconds.|critical||
 
 ## speedtest-exporter
 
 |Name|Summary|Description|Severity|Runbook|
 |---|---|---|---|---|
+|SpeedtestExporterAbsent|Speedtest Exporter is down.|Speedtest Exporter has disappeared from Prometheus target discovery.|critical||
 |SpeedtestSlowInternetDownload|SpeedTest slow internet download.|Internet download speed is averaging {{ humanize $value }} Mbps.|warning||
 |SpeedtestSlowInternetUpload|SpeedTest slow internet upload.|Internet upload speed is averaging {{ humanize $value }} Mbps.|warning||
 

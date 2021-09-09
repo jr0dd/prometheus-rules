@@ -5,13 +5,13 @@ metadata:
   name: gluster
 spec:
   groups:
-    - name: exporter-absent
+    - name: gluster
       rules:
-        - alert: GlusterExporterDown
+        - alert: GlusterExporterAbsent
           annotations:
-            message: GlusterExporter has disappeared from Prometheus target discovery.
+            message: Gluster Exporter has disappeared from Prometheus target discovery.
           expr: |
-            absent(up{job="glusterd2-client"} == 1)
+            absent(up{job=".*gluster.*"} == 1)
           for: 15m
           labels:
             severity: critical
