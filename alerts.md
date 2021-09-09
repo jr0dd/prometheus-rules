@@ -137,7 +137,7 @@
 |PostgresqlTableNotAnalyzed|Postgresql table not analyzed.|Table has not been analyzed for 24 hours.|warning||
 |PostgresqlTooManyConnections|Postgresql too many connections.|PostgreSQL instance has too many connections {{ $value  humanizePercentage }}.|warning||
 |PostgresqlNotEnoughConnections|Postgresql not enough connections.|PostgreSQL instance should have more than {{ $value }} connections|warning||
-|PostgresqlDeadLocks|Postgresql deadlocks.|PostgreSQL is reporting deadlocks on {{ $label.datid }}|warning||
+|PostgresqlDeadLocks|Postgresql deadlocks.|PostgreSQL is reporting deadlocks on {{ $labels.datid }}|warning||
 |PostgresqlSlowQueries|Postgresql slow queries.|PostgreSQL executes slow queries.|warning||
 |PostgresqlHighRollbackRate|Postgresql high rollback rate.|Ratio of transactions being aborted compared to committed is > 2%.|warning||
 |PostgresqlCommitRateLow|Postgresql commit rate low.|Postgres seems to be processing very few transactions.|critical||
@@ -187,6 +187,7 @@
 |RedisTooManyConnections|Redis too many connections.|Redis instance has too many connections.|warning||
 |RedisNotEnoughConnections|Redis not enough connections.|Redis instance should have more connections (> 5).|warning||
 |RedisRejectedConnections|Redis rejected connections.|Some connections to Redis has been rejected.|critical||
+|RedisKeyEviction|Redis instance {{ $labels.instance }} has evicted keys.|Redis instance {{ $labels.instance }} has evicted {{ $value }} keys in the last 5 minutes.|warning||
 
 ## rook-ceph
 
