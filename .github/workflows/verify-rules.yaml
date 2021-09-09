@@ -2,12 +2,19 @@
 name: Verify Prometheus Rules with Promtool
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - "**.yaml"
   pull_request:
+    branches:
+      - main
     paths:
       - "**.yaml"
 
 jobs:
-  on-pull-request:
+  verify_rules:
     name: On Pull Request
     runs-on: ubuntu-latest
     steps:
