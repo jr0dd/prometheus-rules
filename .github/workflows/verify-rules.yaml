@@ -2,16 +2,13 @@
 name: Verify Prometheus Rules with Promtool
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "**.yaml"
+  workflow_dispatch:
   pull_request:
     branches:
       - main
     paths:
-      - "**.yaml"
+      - '!kustomization.yaml'
+      - '**.yaml'
 
 jobs:
   verify_rules:
@@ -21,11 +18,21 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@master
 
-      - name: Verify Prometheus rules
+      - name: Verify Prometheus Alert Rules
         uses: peimanja/promtool-github-actions@master
         with:
           promtool_actions_subcommand: 'rules'
-          promtool_actions_files: '**.yaml'
+          promtool_actions_files: 'alerts.yaml'
+          promtool_actions_version: '2.14.0'
+          promtool_actions_comment: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Verify Prometheus Recording Rules
+        uses: peimanja/promtool-github-actions@master
+        with:
+          promtool_actions_subcommand: 'rules'
+          promtool_actions_files: 'rules.yaml'
           promtool_actions_version: '2.14.0'
           promtool_actions_comment: true
         env:
