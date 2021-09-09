@@ -28,6 +28,7 @@ Some of the sources these have been created from:
 * [cert-manager](#cert-manager)
 * [coredns](#coredns)
 * [discord-stock-ticker](#discord-stock-ticker)
+* [exportarr](#exportarr)
 * [flux](#flux)
 * [gluster](#gluster)
 * [loki](#loki)
@@ -96,6 +97,15 @@ Some of the sources these have been created from:
 |DiscordStockTickerAbsent|Discord Stock Ticker is down.|Discord Stock Ticker has disappeared from Prometheus service discovery.|critical||
 |ZeroTickers|Bot has 0 tickers.|Discord Stock Ticker did not receive the payload to the api.|critical||
 
+## exportarr
+
+|Name|Summary|Description|Severity|Runbook|
+|---|---|---|---|---|
+|ExportarrAbsent|Exportarr is down.|Exportarr component has disappeared from Prometheus service discovery.|critical||
+|LidarrDown|Lidarr is down.|Lidarr service is down.|critical||
+|RadarrDown|Radarr is down.|Radarr service is down.|critical||
+|SonarrDown|Sonarr is down.|Sonarr service is down.|critical||
+
 ## flux
 
 |Name|Summary|Description|Severity|Runbook|
@@ -132,7 +142,7 @@ Some of the sources these have been created from:
 
 |Name|Summary|Description|Severity|Runbook|
 |---|---|---|---|---|
-|MinioAbsent|MinIO component has disappeared.|MinIO has dissapeared from Prometheus service discovery.|critical||
+|MinioAbsent|MinIO component has disappeared.|MinIO component has dissapeared from Prometheus service discovery.|critical||
 |MinioDiskOffline|MinIO disk(s) offline.|MinIO is reporting {{ $value }} disk(s) offline on server {{ $labels.server }}|critical||
 |MinioNodeOffline|MinIO node is offline.|MinIO is reporting that node {{ $labels.server }} is offline.|critical||
 |MinioClusterUsage|MinIO cluster is low on capacity.|MinIO cluster is reporting less than 10% storage free. {{ $value  humanizePercentage }} of cluster storage is available.|warning||
