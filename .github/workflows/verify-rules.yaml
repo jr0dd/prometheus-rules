@@ -12,7 +12,7 @@ on:
 
 jobs:
   verify_rules:
-    name: On Pull Request
+    name: Verify Rules
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -22,7 +22,7 @@ jobs:
         uses: peimanja/promtool-github-actions@master
         with:
           promtool_actions_subcommand: 'rules'
-          promtool_actions_files: 'alerts.yaml'
+          promtool_actions_files: '**/alerts.yaml'
           promtool_actions_version: '2.14.0'
           promtool_actions_comment: true
         env:
@@ -32,7 +32,7 @@ jobs:
         uses: peimanja/promtool-github-actions@master
         with:
           promtool_actions_subcommand: 'rules'
-          promtool_actions_files: 'rules.yaml'
+          promtool_actions_files: '**/rules.yaml'
           promtool_actions_version: '2.14.0'
           promtool_actions_comment: true
         env:
