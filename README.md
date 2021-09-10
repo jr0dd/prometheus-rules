@@ -18,6 +18,10 @@ Some of the sources these have been created from:
 
 * [awesome-prometheus-alerts](https://github.com/samber/awesome-prometheus-alerts)
 
+All rules have been tested using Cloudflare's [pint](https://github.com/cloudflare/pint).
+
+Docs have been generated using Plex Systems' [promdoc](https://github.com/plexsystems/promdoc)
+#
 #
 # Alerts are found [here](rules/alerts.md)
 #
