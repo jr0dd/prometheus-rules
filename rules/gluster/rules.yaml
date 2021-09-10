@@ -8,8 +8,8 @@ spec:
     - name: gluster.rules
       rules:
         - expr: |
-            sum(max(gluster_subvol_capacity_used_bytes{job="glusterd2-client"}) BY (volume, subvolume)) BY (volume)
+            sum by (job) (max(gluster_subvol_capacity_used_bytes{job="glusterd2-client"}) by (job, volume, subvolume))
           record: gluster:volume_capacity_used_bytes_total:sum
         - expr: |
-            sum(max(gluster_subvol_capacity_total_bytes{job="glusterd2-client"}) BY (volume, subvolume)) BY (volume)
+            sum by (job) (max(gluster_subvol_capacity_total_bytes{job="glusterd2-client"}) by (job, volume, subvolume))
           record: gluster:volume_capacity_total_bytes:sum

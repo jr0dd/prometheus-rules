@@ -42,7 +42,7 @@ spec:
           expr: |
             count(redis_instance_info{role="master"})
               > 1
-          for: 0m
+          for: 1m
           labels:
             severity: critical
         - alert: RedisDisconnectedSlaves

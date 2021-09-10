@@ -52,9 +52,10 @@ spec:
           annotations:
             description: Log file for {{ $labels.instance }} {{ $labels.job }} {{ $labels.path }} matches the glob but is not being tailed.
             summary: Promtail file missing.
-          # pint disable alerts/count
           expr: |
-            promtail_file_bytes_total unless promtail_read_bytes_total
+            promtail_file_bytes_total{path!~".*init.*"} == 0
+              unless
+            promtail_read_bytes_total != 0
           for: 15m
           labels:
             severity: critical
