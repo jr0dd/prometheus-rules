@@ -1,0 +1,24 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - blackbox-exporter
+  - blocky
+  - ceph
+  - cert-manager
+  - coredns
+  - discord-stock-ticker
+  - exportarr
+  - flux
+  - gluster
+  - loki
+  - minio
+  - nut-exporter
+  - postgres-exporter
+  - promtail
+  - qbittorrent
+  - redis-exporter
+  - snmp-exporter
+  - speedtest-exporter
+  - thanos
+  - traefik
