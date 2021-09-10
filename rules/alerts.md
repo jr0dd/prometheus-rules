@@ -1,7 +1,3 @@
-<!---
-# pint ignore/file
--->
-
 # Alerts
 
 ## Rule Groups
@@ -21,7 +17,6 @@
 * [promtail](#promtail)
 * [qbittorrent-exporter](#qbittorrent-exporter)
 * [redis-exporter](#redis-exporter)
-* [rook-ceph](#rook-ceph)
 * [snmp-exporter](#snmp-exporter)
 * [speedtest-exporter](#speedtest-exporter)
 * [thanos-bucket-replicate](#thanos-bucket-replicate)
@@ -100,17 +95,17 @@
 
 |Name|Summary|Description|Severity|Runbook|
 |---|---|---|---|---|
-|GlusterExporterAbsent||Gluster Exporter has disappeared from Prometheus target discovery.|critical||
-|GlusterBrickStatus||Gluster Brick {{$labels.hostname}}:{{$labels.brick_path}} is down.|critical||
-|GlusterVolumeStatus||Gluster Volume {{$labels.volume}} is down.|critical||
-|GlusterVolumeUtilization||Gluster Volume {{$labels.volume}} Utilization more than 80%|warning||
-|GlusterVolumeUtilization||Gluster Volume {{$labels.volume}} Utilization more than 90%|critical||
-|GlusterBrickUtilization||Gluster Brick {{$labels.host}}:{{$labels.brick_path}} Utilization more than 80%|warning||
-|GlusterBrickUtilization||Gluster Brick {{$labels.host}}:{{$labels.brick_path}} Utilization more than 90%|critical||
-|GlusterThinpoolDataUtilization||Gluster Thinpool {{ $labels.thinpool_name }} Data Utilization more than 80%|warning||
-|GlusterThinpoolDataUtilization||Gluster Thinpool {{ $labels.thinpool_name }} Data Utilization more than 90%|critical||
-|GlusterThinpoolMetadataUtilization||Gluster Thinpool {{ $labels.thinpool_name }} Metadata Utilization more than 80%|warning||
-|GlusterThinpoolMetadataUtilization||Gluster Thinpool {{ $labels.thinpool_name }} Metadata Utilization more than 90%|critical||
+|GlusterExporterAbsent|Gluster Exporter down.|Gluster Exporter has disappeared from Prometheus target discovery.|critical||
+|GlusterBrickStatus|Gluster brick is down.|Gluster Brick {{$labels.hostname}}:{{$labels.brick_path}} is down.|critical||
+|GlusterVolumeStatus|Gluster volume is down.|Gluster Volume {{$labels.volume}} is down.|critical||
+|GlusterVolumeUtilization|High Gluster volume usage.|Gluster Volume {{$labels.volume}} Utilization more than 80%.|warning||
+|GlusterVolumeUtilization|Critical Gluster volume usage.|Gluster Volume {{$labels.volume}} Utilization more than 90%|critical||
+|GlusterBrickUtilization|High Gluster brick usage.|Gluster Brick {{$labels.host}}:{{$labels.brick_path}} Utilization more than 80%.|warning||
+|GlusterBrickUtilization|Critical Gluster brick usage.|Gluster Brick {{$labels.host}}:{{$labels.brick_path}} Utilization more than 90%.|critical||
+|GlusterThinpoolDataUtilization|High Gluster thinpool data usage.|Gluster Thinpool {{ $labels.thinpool_name }} Data Utilization more than 80%.|warning||
+|GlusterThinpoolDataUtilization|Critical Gluster thinpool data usage.|Gluster Thinpool {{ $labels.thinpool_name }} Data Utilization more than 90%.|critical||
+|GlusterThinpoolMetadataUtilization|High Gluster thinpool metadata usage.|Gluster Thinpool {{ $labels.thinpool_name }} Metadata Utilization more than 80%.|warning||
+|GlusterThinpoolMetadataUtilization|High Gluster thinpool metadata usage.|Gluster Thinpool {{ $labels.thinpool_name }} Metadata Utilization more than 90%.|critical||
 
 ## loki
 
@@ -119,7 +114,7 @@
 |LokiAbsent|Loki is down.|Loki has disappeared from Prometheus service discovery.|critical||
 |LokiRequestErrors|Loki high error rate.|Loki is experiencing {{ $value  humanizePercentage }} of errors on {{ $labels.job }} {{ $labels.route }}.|critical||
 |LokiRequestPanics|Loki request panics.|Loki is experiencing {{ $value  humanizePercentage }} increase of panics on {{ $labels.job }}.|critical||
-|LokiRequestLatency|Loki request latency.||critical||
+|LokiRequestLatency|Loki request latency.|Loki is experiencing {{ $value }}s 99th percentile latency on {{ $labels.job }} {{ $labels.route }}.|critical||
 
 ## minio
 
@@ -206,36 +201,6 @@
 |RedisNotEnoughConnections|Redis not enough connections.|Redis instance should have more connections (> 5).|warning||
 |RedisRejectedConnections|Redis rejected connections.|Some connections to Redis has been rejected.|critical||
 |RedisKeyEviction|Redis instance {{ $labels.instance }} has evicted keys.|Redis instance {{ $labels.instance }} has evicted {{ $value }} keys in the last 5 minutes.|warning||
-
-## rook-ceph
-
-|Name|Summary|Description|Severity|Runbook|
-|---|---|---|---|---|
-|CephMgrIsAbsent|Storage metrics collector service not available anymore.|Ceph Manager has disappeared from Prometheus target discovery.|critical||
-|CephMgrIsMissingReplicas|Storage metrics collector service doesn't have required no of replicas.|Ceph Manager is missing replicas.|warning||
-|CephMdsMissingReplicas|Insufficient replicas for storage metadata service.|Minimum required replicas for storage metadata service not available. Might affect the working of storage cluster.|warning||
-|CephMonQuorumAtRisk|Storage quorum at risk|Storage cluster quorum is low. Contact Support.|critical||
-|CephMonHighNumberOfLeaderChanges|Storage Cluster has seen many leader changes recently.|Ceph Monitor {{ $labels.ceph_daemon }} on host {{ $labels.hostname }} has seen {{ $value  printf "%.2f" }} leader changes per minute recently.|warning||
-|CephNodeDown|Storage node {{ $labels.node }} went down|Storage node {{ $labels.node }} went down. Please check the node immediately.|critical||
-|CephOSDCriticallyFull|Back-end storage device is critically full.|Utilization of storage device {{ $labels.ceph_daemon }} of device_class type {{$labels.device_class}} has crossed 80% on host {{ $labels.hostname }}. Immediately free up some space or add capacity of type {{$labels.device_class}}.|critical||
-|CephOSDFlapping|Ceph storage osd flapping.|Storage daemon {{ $labels.ceph_daemon }} has restarted 5 times in last 5 minutes. Please check the pod events or ceph status to find out the cause.|critical||
-|CephOSDNearFull|Back-end storage device is nearing full.|Utilization of storage device {{ $labels.ceph_daemon }} of device_class type {{$labels.device_class}} has crossed 75% on host {{ $labels.hostname }}. Immediately free up some space or add capacity of type {{$labels.device_class}}.|warning||
-|CephOSDDiskNotResponding|Disk not responding|Disk device {{ $labels.device }} not responding, on host {{ $labels.host }}.|critical||
-|CephOSDDiskUnavailable|Disk not accessible|Disk device {{ $labels.device }} not accessible on host {{ $labels.host }}.|critical||
-|CephOSDSlowOps|OSD requests are taking too long to process.|{{ $value }} Ceph OSD requests are taking too long to process. Please check ceph status to find out the cause.|warning||
-|CephDataRecoveryTakingTooLong|Data recovery is slow|Data recovery has been active for too long. Contact Support.|warning||
-|CephPGRepairTakingTooLong|Self heal problems detected|Self heal operations taking too long. Contact Support.|warning||
-|PersistentVolumeUsageNearFull|PVC {{ $labels.persistentvolumeclaim }} is nearing full. Data deletion or PVC expansion is required.|PVC {{ $labels.persistentvolumeclaim }} utilization has crossed 75%. Free up some space or expand the PVC.|warning||
-|PersistentVolumeUsageCritical|PVC {{ $labels.persistentvolumeclaim }} is critically full. Data deletion or PVC expansion is required.|PVC {{ $labels.persistentvolumeclaim }} utilization has crossed 85%. Free up some space or expand the PVC immediately.|critical||
-|CephClusterErrorState|Storage cluster is in error state|Storage cluster is in error state for more than 10m.|critical||
-|CephClusterWarningState|Storage cluster is in degraded state|Storage cluster is in warning state for more than 10m.|warning||
-|CephOSDVersionMismatch|There are multiple versions of storage services running.|There are {{ $value }} different versions of Ceph OSD components running.|warning||
-|CephMonVersionMismatch|There are multiple versions of storage services running.|There are {{ $value }} different versions of Ceph Mon components running.|warning||
-|CephClusterNearFull|Storage cluster is nearing full. Data deletion or cluster expansion is required.|Storage cluster utilization has crossed 75% and will become read-only at 85%. Free up some space or expand the storage cluster.|warning||
-|CephClusterCriticallyFull|Storage cluster is critically full and needs immediate data deletion or cluster expansion.|Storage cluster utilization has crossed 80% and will become read-only at 85%. Free up some space or expand the storage cluster immediately.|critical||
-|CephClusterReadOnly|Storage cluster is read-only now and needs immediate data deletion or cluster expansion.|Storage cluster utilization has crossed 85% and will become read-only now. Free up some space or expand the storage cluster immediately.|critical||
-|CephPoolQuotaBytesNearExhaustion|Storage pool quota(bytes) is near exhaustion.|Storage pool {{ $labels.name }} quota usage has crossed 70%.|warning||
-|CephPoolQuotaBytesCriticallyExhausted|Storage pool quota(bytes) is critically exhausted.|Storage pool {{ $labels.name }} quota usage has crossed 90%.|critical||
 
 ## snmp-exporter
 

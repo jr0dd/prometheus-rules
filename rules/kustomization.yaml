@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - blackbox-exporter
   - blocky
-  - ceph
   - cert-manager
   - coredns
   - discord-stock-ticker

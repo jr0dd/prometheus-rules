@@ -12,8 +12,6 @@ Some of the sources these have been created from:
 
 * [monitoring-mixins](https://github.com/monitoring-mixins/website)
 
-* [ceph-mixins](https://github.com/ceph/ceph-mixins)
-
 * [glusterfs-mixins](https://github.com/gluster/gluster-mixins)
 
 * [awesome-prometheus-alerts](https://github.com/samber/awesome-prometheus-alerts)
