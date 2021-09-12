@@ -1,3 +1,7 @@
+<!--
+# pint ignore/file
+-->
+
 # Alerts
 
 ## Rule Groups
@@ -7,17 +11,19 @@
 * [cert-manager](#cert-manager)
 * [coredns](#coredns)
 * [discord-stock-ticker](#discord-stock-ticker)
-* [exportarr](#exportarr)
 * [flux](#flux)
 * [gluster](#gluster)
+* [lidarr](#lidarr)
 * [loki](#loki)
 * [minio](#minio)
 * [nut-exporter](#nut-exporter)
 * [postgres-exporter](#postgres-exporter)
 * [promtail](#promtail)
 * [qbittorrent-exporter](#qbittorrent-exporter)
+* [radarr](#radarr)
 * [redis-exporter](#redis-exporter)
 * [snmp-exporter](#snmp-exporter)
+* [sonarr](#sonarr)
 * [speedtest-exporter](#speedtest-exporter)
 * [thanos-bucket-replicate](#thanos-bucket-replicate)
 * [thanos-compact](#thanos-compact)
@@ -75,15 +81,6 @@
 |DiscordStockTickerAbsent|Discord Stock Ticker is down.|Discord Stock Ticker has disappeared from Prometheus service discovery.|critical||
 |ZeroTickers|Bot has 0 tickers.|Discord Stock Ticker did not receive the payload to the api.|critical||
 
-## exportarr
-
-|Name|Summary|Description|Severity|Runbook|
-|---|---|---|---|---|
-|ExportarrAbsent|Exportarr is down.|Exportarr component has disappeared from Prometheus service discovery.|critical||
-|LidarrDown|Lidarr is down.|Lidarr service is down.|critical||
-|RadarrDown|Radarr is down.|Radarr service is down.|critical||
-|SonarrDown|Sonarr is down.|Sonarr service is down.|critical||
-
 ## flux
 
 |Name|Summary|Description|Severity|Runbook|
@@ -106,6 +103,13 @@
 |GlusterThinpoolDataUtilization|Critical Gluster thinpool data usage.|Gluster Thinpool {{ $labels.thinpool_name }} Data Utilization more than 90%.|critical||
 |GlusterThinpoolMetadataUtilization|High Gluster thinpool metadata usage.|Gluster Thinpool {{ $labels.thinpool_name }} Metadata Utilization more than 80%.|warning||
 |GlusterThinpoolMetadataUtilization|High Gluster thinpool metadata usage.|Gluster Thinpool {{ $labels.thinpool_name }} Metadata Utilization more than 90%.|critical||
+
+## lidarr
+
+|Name|Summary|Description|Severity|Runbook|
+|---|---|---|---|---|
+|ExportarrAbsent|Exportarr is down.|Lidarr Exportarr has disappeared from Prometheus service discovery.|critical||
+|LidarrDown|Lidarr is down.|Lidarr service is down.|critical||
 
 ## loki
 
@@ -183,6 +187,13 @@
 |qBittorrentExporterAbsent|qBittorrent Exporter is down.|qBittorrent Exporter has disappeared from Prometheus service discovery.|critical||
 |qBittorrentDown|qBittorrent is down.|qBittorrent service is down.|critical||
 
+## radarr
+
+|Name|Summary|Description|Severity|Runbook|
+|---|---|---|---|---|
+|ExportarrAbsent|Exportarr is down.|Radarr Exportarr has disappeared from Prometheus service discovery.|critical||
+|RadarrDown|Radarr is down.|Radarr service is down.|critical||
+
 ## redis-exporter
 
 |Name|Summary|Description|Severity|Runbook|
@@ -208,6 +219,13 @@
 |---|---|---|---|---|
 |SnmpExporterAbsent|SNMP Exporter is down.|SNMP Exporter has disappeared from Prometheus target discovery.|critical||
 |SnmpExporterScrapeSlow|SNMP Exporter slow scraping.|SNMP Exporter is experiencing slow scraping of {{ $labels.job }} with a duration of {{ $value }} seconds.|critical||
+
+## sonarr
+
+|Name|Summary|Description|Severity|Runbook|
+|---|---|---|---|---|
+|ExportarrAbsent|Exportarr is down.|Sonarr Exportarr has disappeared from Prometheus service discovery.|critical||
+|SonarrDown|Sonarr is down.|Sonarr service is down.|critical||
 
 ## speedtest-exporter
 
