@@ -1,12 +1,12 @@
-# rules defined in file matching "rules/.+"
-prometheus "production" {
-  uri     = "https://prometheus.domain.tld"
-  timeout = "30s"
+// # rules defined in file matching "rules/.+"
+// prometheus "production" {
+//   uri     = "https://prometheus.domain.tld"
+//   timeout = "30s"
 
-  paths = [
-    "rules/.+",
-  ]
-}
+//   paths = [
+//     "rules/.+",
+//   ]
+// }
 
 rule {
   # Disallow spaces in label/annotation keys, they're only allowed in values.

@@ -216,6 +216,8 @@
 |SpeedtestExporterAbsent|Speedtest Exporter is down.|Speedtest Exporter has disappeared from Prometheus target discovery.|critical||
 |SpeedtestSlowInternetDownload|SpeedTest slow internet download.|Internet download speed is averaging {{ humanize $value }} Mbps.|warning||
 |SpeedtestSlowInternetUpload|SpeedTest slow internet upload.|Internet upload speed is averaging {{ humanize $value }} Mbps.|warning||
+|SpeedtestHighPingLatency|SpeedTest high ping latency.|Internet ping latency is averaging {{ humanize $value }} ms.|warning||
+|SpeedtestHighJitterLatency|SpeedTest high jitter latency.|Internet jitter latency is averaging {{ humanize $value }} ms.|warning||
 
 ## thanos-bucket-replicate
 
