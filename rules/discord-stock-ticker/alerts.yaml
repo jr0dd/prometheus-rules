@@ -13,7 +13,7 @@ spec:
               service discovery.
             summary: Discord Stock Ticker is down.
           expr: |
-            absent(up{job="discord-stock-ticker"} == 1)
+            absent(up{job=~".*discord-stock-ticker.*"} == 1)
           for: 5m
           labels:
             severity: critical
@@ -23,7 +23,7 @@ spec:
               to the api.
             summary: Bot has 0 tickers.
           expr: |
-            ticker_count{job="discord-stock-ticker"} == 0
+            ticker_count{job=~".*discord-stock-ticker.*"} == 0
           for: 5m
           labels:
             severity: critical

@@ -22,7 +22,7 @@ spec:
             description: Lidarr service is down.
             summary: Lidarr is down.
           expr: |
-            lidarr_system_status == 0
+            lidarr_system_status{job=~".lidarr.*"} == 0
           for: 5m
           labels:
             severity: critical

@@ -22,7 +22,7 @@ spec:
             description: Radarr service is down.
             summary: Radarr is down.
           expr: |
-            radarr_system_status == 0
+            radarr_system_status{job=~".radarr.*"} == 0
           for: 5m
           labels:
             severity: critical

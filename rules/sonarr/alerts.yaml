@@ -22,7 +22,7 @@ spec:
             description: Sonarr service is down.
             summary: Sonarr is down.
           expr: |
-            sonarr_system_status == 0
+            sonarr_system_status{job=~".sonarr.*"} == 0
           for: 5m
           labels:
             severity: critical

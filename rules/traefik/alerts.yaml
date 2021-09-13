@@ -12,7 +12,7 @@ spec:
             description: Traefik has disappeared from Prometheus service discovery.
             summary: Traefik is down.
           expr: |
-            absent(up{job="traefik"} == 1)
+            absent(up{job=~".*traefik.*"} == 1)
           for: 5m
           labels:
             severity: critical
@@ -22,7 +22,7 @@ spec:
               logs for exact parsing error.
             summary: Traefik config error.
           expr: |
-            traefik_config_last_reload_failure{job="traefik"} == 1
+            traefik_config_last_reload_failure{job=~".*traefik.*"} == 1
           for: 0m
           labels:
             severity: critical
@@ -58,7 +58,7 @@ spec:
               {{ $labels.entrypoint }}.
             summary: Traefik has too many open connections.
           expr: |
-            avg(traefik_entrypoint_open_connections{job="traefik"})
+            avg(traefik_entrypoint_open_connections{job=~".*traefik.*"})
               > 5
           for: 1m
           labels:
