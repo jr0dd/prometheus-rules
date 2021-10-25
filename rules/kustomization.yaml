@@ -9,7 +9,6 @@ resources:
   - discord-stock-ticker
   - exportarr
   - flux
-  - gluster
   - loki
   - minio
   - nut-exporter

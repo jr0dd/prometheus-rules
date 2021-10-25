@@ -1,7 +1,3 @@
-<!--
-# pint ignore/file
--->
-
 # Alerts
 
 ## Rule Groups
@@ -12,7 +8,6 @@
 * [coredns](#coredns)
 * [discord-stock-ticker](#discord-stock-ticker)
 * [flux](#flux)
-* [gluster](#gluster)
 * [lidarr](#lidarr)
 * [loki](#loki)
 * [minio](#minio)
@@ -88,22 +83,6 @@
 |FluxComponentAbsent|Flux component is down.|Flux component has disappeared from Prometheus target discovery.|critical||
 |FluxReconciliationFailure|Flux reconciliation failure.|{{ $labels.kind }} {{ $labels.namespace }}/{{ $labels.name }} reconciliation has been failing for more than ten minutes.|critical||
 
-## gluster
-
-|Name|Summary|Description|Severity|Runbook|
-|---|---|---|---|---|
-|GlusterExporterAbsent|Gluster Exporter down.|Gluster Exporter has disappeared from Prometheus target discovery.|critical||
-|GlusterBrickStatus|Gluster brick is down.|Gluster Brick {{$labels.hostname}}:{{$labels.brick_path}} is down.|critical||
-|GlusterVolumeStatus|Gluster volume is down.|Gluster Volume {{$labels.volume}} is down.|critical||
-|GlusterVolumeUtilization|High Gluster volume usage.|Gluster Volume {{$labels.volume}} Utilization more than 80%.|warning||
-|GlusterVolumeUtilization|Critical Gluster volume usage.|Gluster Volume {{$labels.volume}} Utilization more than 90%|critical||
-|GlusterBrickUtilization|High Gluster brick usage.|Gluster Brick {{$labels.host}}:{{$labels.brick_path}} Utilization more than 80%.|warning||
-|GlusterBrickUtilization|Critical Gluster brick usage.|Gluster Brick {{$labels.host}}:{{$labels.brick_path}} Utilization more than 90%.|critical||
-|GlusterThinpoolDataUtilization|High Gluster thinpool data usage.|Gluster Thinpool {{ $labels.thinpool_name }} Data Utilization more than 80%.|warning||
-|GlusterThinpoolDataUtilization|Critical Gluster thinpool data usage.|Gluster Thinpool {{ $labels.thinpool_name }} Data Utilization more than 90%.|critical||
-|GlusterThinpoolMetadataUtilization|High Gluster thinpool metadata usage.|Gluster Thinpool {{ $labels.thinpool_name }} Metadata Utilization more than 80%.|warning||
-|GlusterThinpoolMetadataUtilization|High Gluster thinpool metadata usage.|Gluster Thinpool {{ $labels.thinpool_name }} Metadata Utilization more than 90%.|critical||
-
 ## lidarr
 
 |Name|Summary|Description|Severity|Runbook|
@@ -144,31 +123,12 @@
 |Name|Summary|Description|Severity|Runbook|
 |---|---|---|---|---|
 |PostgresqlExporterAbsent|Postgresql Exporter is down.|Postgresql Exporter has disappeared from Prometheus target discovery.|critical||
-|PostgresqlDown|Postgresql is down.|Postgresql service is down.|critical||
-|PostgresqlRestarted|Postgresql restarted.|Postgresql has restarted.|critical||
-|PostgresqlExporterError|Postgresql exporter error.|Postgresql exporter is showing errors. A query may be buggy in query.yaml.|critical||
-|PostgresqlReplicationLag|Postgresql replication lag.|PostgreSQL replication lag is reporting {{ $value }}s.|critical||
-|PostgresqlTableNotVaccumed|Postgresql table not vaccumed.|Table has not been vaccum for 24 hours.|warning||
-|PostgresqlTableNotAnalyzed|Postgresql table not analyzed.|Table has not been analyzed for 24 hours.|warning||
-|PostgresqlTooManyConnections|Postgresql too many connections.|PostgreSQL instance has too many connections {{ $value  humanizePercentage }}.|warning||
-|PostgresqlNotEnoughConnections|Postgresql not enough connections.|PostgreSQL instance should have more than {{ $value }} connections|warning||
-|PostgresqlDeadLocks|Postgresql deadlocks.|PostgreSQL is reporting deadlocks on {{ $labels.datid }}|warning||
-|PostgresqlSlowQueries|Postgresql slow queries.|PostgreSQL executes slow queries.|warning||
-|PostgresqlHighRollbackRate|Postgresql high rollback rate.|Ratio of transactions being aborted compared to committed is > 2%.|warning||
-|PostgresqlCommitRateLow|Postgresql commit rate low.|Postgres seems to be processing very few transactions.|critical||
-|PostgresqlLowXidConsumption|Postgresql low XID consumption.|Postgresql seems to be consuming transaction IDs very slowly.|warning||
-|PostgresqllowXlogConsumption|Postgresqllow XLOG consumption.|Postgres seems to be consuming XLOG very slowly.|warning||
-|PostgresqlWaleReplicationStopped|WAL-E replication stopped.|Postgres is reporting that WAL-E replication is stopped.|critical||
-|PostgresqlHighRateStatementTimeout|Postgresql high rate statement timeout.|Postgres transactions showing high rate of statement timeouts.|critical||
-|PostgresqlHighRateDeadlock|Postgresql detected deadlocks.|Postgres is reporting a high number of deadlocks.|critical||
-|PostgresqlReplicationLagBytes|Postgresql replication lag.|Postgres Replication lag {{ $value }} (in bytes) is high.|critical||
-|PostgresqlUnusedReplicationSlot|Unused replication slots.|Postgres is reporting unused replication slots.|warning||
-|PostgresqlTooManyDeadTuples|Postgresql too many dead tuples.|PostgreSQL dead tuples is too large.|warning||
-|PostgresqlSplitBrain|Postgresql split brain.|Split Brain, too many primary Postgresql databases in read-write mode.|critical||
-|PostgresqlPromotedNode|Postgresql promoted node.|Postgresql standby server has been promoted as primary node.|warning||
-|PostgresqlConfigurationChanged|Postgresql configuration changed.|Postgres Database configuration change has occurred.|warning||
-|PostgresqlSslCompressionActive|Postgresql SSL compression active (instance {{ $labels.instance }})|Database connections with SSL compression enabled. This may add significant jitter in replication delay. Replicas should turn off SSL compression via `sslcompression=0` in `recovery.conf`.|critical||
-|PostgresqlTooManyLocksAcquired|Postgresql too many locks acquired (instance {{ $labels.instance }})|Too many locks acquired on the database. If this alert happens frequently, we may need to increase the postgres setting max_locks_per_transaction.|critical||
+|PostgreSQLMaxConnectionsReached|{{ $labels.instance }} has maxed out Postgres connections.|{{ $labels.instance }} is exceeding the currently configured maximum Postgres connection limit (current value: {{ $value }}s). Services may be degraded - please take immediate action (you probably need to increase max_connections in the Docker image and re-deploy.|critical||
+|PostgreSQLHighConnections|{{ $labels.instance }} is over 80% of max Postgres connections.|{{ $labels.instance }} is exceeding 80% of the currently configured maximum Postgres connection limit (current value: {{ $value }}s). Please check utilization graphs and confirm if this is normal service growth, abuse or an otherwise temporary condition or if new resources need to be provisioned (or the limits increased, which is mostly likely).|critical||
+|PostgreSQLDown|PostgreSQL is not processing queries: {{ $labels.instance }}|{{ $labels.instance }} is rejecting query requests from the exporter, and thus probably not allowing DNS requests to work either. User services should not be effected provided at least 1 node is still alive.|critical||
+|PostgreSQLSlowQueries|PostgreSQL high number of slow on {{ $labels.cluster }} for database {{ $labels.datname }}|PostgreSQL high number of slow queries {{ $labels.cluster }} for database {{ $labels.datname }} with a value of {{ $value }} |critical||
+|PostgreSQLQPS|PostgreSQL high number of queries per second {{ $labels.cluster }} for database {{ $labels.datname }}|PostgreSQL high number of queries per second on {{ $labels.cluster }} for database {{ $labels.datname }} with a value of {{ $value }}|critical||
+|PostgreSQLCacheHitRatio|PostgreSQL low cache hit rate on {{ $labels.cluster }} for database {{ $labels.datname }}|PostgreSQL low on cache hit rate on {{ $labels.cluster }} for database {{ $labels.datname }} with a value of {{ $value }}|critical||
 
 ## promtail
 
